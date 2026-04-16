@@ -1,0 +1,77 @@
+@TaskManagementAPI_HostAddress = http://localhost:5243
+@adminToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWRtaW4iLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJBZG1pbiIsImV4cCI6MTc3NjM0NTk3NX0.y6T7SCjcftGcmT1p8_7osi7rQIVc_Mj0ymztU8H8MRc
+@managerToken = PASTE_MANAGER_TOKEN_HERE
+@employeeToken = PASTE_EMPLOYEE_TOKEN_HERE
+
+### LOGIN AS ADMIN
+POST {{TaskManagementAPI_HostAddress}}/api/auth/login
+Content-Type: application/json
+X-API-KEY: your-secret-key
+
+{
+  "username": "admin",
+  "password": "admin123"
+}
+
+### LOGIN AS MANAGER
+POST {{TaskManagementAPI_HostAddress}}/api/auth/login
+Content-Type: application/json
+X-API-KEY: your-secret-key
+
+{
+  "username": "manager",
+  "password": "manager123"
+}
+
+### LOGIN AS EMPLOYEE
+POST {{TaskManagementAPI_HostAddress}}/api/auth/login
+Content-Type: application/json
+X-API-KEY: your-secret-key
+
+{
+  "username": "employee",
+  "password": "employee123"
+}
+
+### GET TASKS AS ADMIN
+GET {{TaskManagementAPI_HostAddress}}/api/tasks
+Authorization: Bearer {{adminToken}}
+
+### GET TASKS AS MANAGER
+GET {{TaskManagementAPI_HostAddress}}/api/tasks
+Authorization: Bearer {{managerToken}}
+
+### GET TASKS AS EMPLOYEE
+GET {{TaskManagementAPI_HostAddress}}/api/tasks
+Authorization: Bearer {{employeeToken}}
+
+### CREATE TASK AS ADMIN OR MANAGER
+POST {{TaskManagementAPI_HostAddress}}/api/tasks
+Content-Type: application/json
+Authorization: Bearer {{adminToken}}
+
+{
+  "title": "New Task",
+  "description": "Complete the API activity",
+  "status": "Pending"
+}
+
+### UPDATE TASK AS ADMIN OR MANAGER
+PUT {{TaskManagementAPI_HostAddress}}/api/tasks/1
+Content-Type: application/json
+Authorization: Bearer {{adminToken}}
+
+{
+  "title": "Updated Task",
+  "description": "Updated task description",
+  "status": "Completed"
+}
+
+### GET USERS AS ADMIN
+GET {{TaskManagementAPI_HostAddress}}/api/admin/users
+Authorization: Bearer {{adminToken}}
+
+### DELETE USER AS ADMIN
+DELETE {{TaskManagementAPI_HostAddress}}/api/admin/users/3
+Authorization: Bearer {{adminToken}}
+
